@@ -10,9 +10,8 @@ use rand::Rng;
 pub unsafe fn memchr_unroll_sse2_overlapping_idx(n1: u8, haystack: &[u8]) -> Option<usize> {
     const UNROLL_SIZE: usize = 1;
 
-    let mut idx = 0;
-
     if haystack.len() < 16 {
+        let mut idx = 0;
         while idx != haystack.len() {
             if n1 == *haystack.get_unchecked(idx) {
                 return Some(idx);
